@@ -19,5 +19,7 @@ java -jar price-basket-1.0-SNAPSHOT.jar Apple
 
 ## Output
 Subtotal: £2.65
+
 Apple 10% off: -20p
+
 Total: £2.45
