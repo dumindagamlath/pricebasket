@@ -102,6 +102,32 @@ public class DiscountServiceImplTest {
         assertEquals(BigDecimal.valueOf(0.24), order.getOrderItems().get(1).getDiscount());
     }
 
+    @Test
+    void applyDiscount_should_apply_discount_for_product_with_MultiBuyDiscountPolicy_with_single_applicable_product_item() {
+        Order order = getMultipleItemOrderWithMultiBuyDiscountPolicyWithOnlySingleApplicableMultipleReducedItem();
+
+        discountService.applyDiscount(order);
+
+        assertEquals(2, order.getOrderItems().size());
+        assertEquals(BigDecimal.valueOf(1.95), order.getOrderItems().get(0).getAmount());
+        assertNull(order.getOrderItems().get(0).getDiscount());
+        assertEquals(BigDecimal.valueOf(2.40), order.getOrderItems().get(1).getAmount());
+        assertEquals(BigDecimal.valueOf(0.24), order.getOrderItems().get(1).getDiscount());
+    }
+
+    @Test
+    void applyDiscount_should_apply_discount_for_product_with_MultiBuyDiscountPolicy_with_multiple_applicable_product_quantities() {
+        Order order = getMultipleItemOrderWithMultiBuyDiscountPolicyWithApplicableMultipleReducedItem();
+
+        discountService.applyDiscount(order);
+
+        assertEquals(2, order.getOrderItems().size());
+        assertEquals(BigDecimal.valueOf(2.60), order.getOrderItems().get(0).getAmount());
+        assertNull(order.getOrderItems().get(0).getDiscount());
+        assertEquals(BigDecimal.valueOf(2.40), order.getOrderItems().get(1).getAmount());
+        assertEquals(BigDecimal.valueOf(0.48), order.getOrderItems().get(1).getDiscount());
+    }
+
     private Order getSingleItemOrderWithPercentageDiscountPolicy() {
         Order newOrder = new Order();
         List<ProductOrder> orderItems = new ArrayList<>();
@@ -215,6 +241,54 @@ public class DiscountServiceImplTest {
                 .product(bread)
                 .quantity(1)
                 .amount(BigDecimal.valueOf(1.20))
+                .build());
+        newOrder.setOrderItems(orderItems);
+        return newOrder;
+    }
+
+    private Order getMultipleItemOrderWithMultiBuyDiscountPolicyWithOnlySingleApplicableMultipleReducedItem() {
+        Order newOrder = new Order();
+        List<ProductOrder> orderItems = new ArrayList<>();
+        Product bread = Product.builder()
+                .name("Bread")
+                .price(BigDecimal.valueOf(1.20)).build();
+        Product soup = Product.builder()
+                .name("Soup")
+                .price(BigDecimal.valueOf(0.65))
+                .discountPolicy(new MultiBuyDiscountPolicy(2, bread, 0.20)).build();
+        orderItems.add(ProductOrder.builder()
+                .product(soup)
+                .quantity(3)
+                .amount(BigDecimal.valueOf(1.95))
+                .build());
+        orderItems.add(ProductOrder.builder()
+                .product(bread)
+                .quantity(2)
+                .amount(BigDecimal.valueOf(2.40))
+                .build());
+        newOrder.setOrderItems(orderItems);
+        return newOrder;
+    }
+
+    private Order getMultipleItemOrderWithMultiBuyDiscountPolicyWithApplicableMultipleReducedItem() {
+        Order newOrder = new Order();
+        List<ProductOrder> orderItems = new ArrayList<>();
+        Product bread = Product.builder()
+                .name("Bread")
+                .price(BigDecimal.valueOf(1.20)).build();
+        Product soup = Product.builder()
+                .name("Soup")
+                .price(BigDecimal.valueOf(0.65))
+                .discountPolicy(new MultiBuyDiscountPolicy(2, bread, 0.20)).build();
+        orderItems.add(ProductOrder.builder()
+                .product(soup)
+                .quantity(4)
+                .amount(BigDecimal.valueOf(2.60))
+                .build());
+        orderItems.add(ProductOrder.builder()
+                .product(bread)
+                .quantity(2)
+                .amount(BigDecimal.valueOf(2.40))
                 .build());
         newOrder.setOrderItems(orderItems);
         return newOrder;
