@@ -9,7 +9,14 @@ import com.store.model.Order;
 import com.store.service.CheckoutService;
 
 @Service
+/**
+ * Service to calculate subtotal and discount of the order
+ */
 public class CheckoutServiceImpl implements CheckoutService {
+    /**
+     * Complete the order calculation by traversing the <code>ProductOrder</code> items
+     * @param order <code>Order</code>
+     */
     @Override public void completeOrder(final Order order) {
         order.setPrice(order.getOrderItems().stream()
                 .map(x->x.getAmount())

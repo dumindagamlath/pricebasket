@@ -34,6 +34,7 @@ public class PriceBasket implements CommandLineRunner {
 
     @Override public void run(final String... args) throws Exception {
         Order newOrder = null;
+        // Create order with provided list of items
         try {
             newOrder = basketService.createBasket(args);
         } catch(ProductNotFoundException pnfe) {
@@ -41,8 +42,13 @@ public class PriceBasket implements CommandLineRunner {
         }
 
         if (newOrder != null) {
+            // Apply the discounts for product lines
             discountService.applyDiscount(newOrder);
+
+            // Calculate the subtotal, total of the order
             checkoutService.completeOrder(newOrder);
+
+            // Print the receipt
             billingService.printBill(newOrder);
         }
     }

@@ -14,6 +14,9 @@ import com.store.model.product.Product;
 import com.store.service.ProductService;
 import lombok.AllArgsConstructor;
 
+/**
+ * Lookup for product items and throw ProductNotFoundException if product not found.
+ */
 @Service
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
@@ -30,6 +33,12 @@ public class ProductServiceImpl implements ProductService {
         products.add(milk);
     }
 
+    /**
+     * Lookup for product given the name
+     * @param name Name of the product to search
+     * @return <code>Product</code>
+     * @throws ProductNotFoundException
+     */
     @Override
     public Product getProduct(String name) throws ProductNotFoundException {
         Optional<Product> product = products.stream()
