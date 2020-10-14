@@ -2,6 +2,7 @@ package com.store.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class BillingServiceImpl implements BillingService {
     private void printBreakdown(Order order) {
         output(String.format("Subtotal: £%.2f", order.getPrice()));
         List<ProductOrder> discountedProducts = order.getOrderItems().stream()
-                .filter(p->p.getDiscount().compareTo(BigDecimal.ZERO) == 1)
+                .filter(p-> Objects.nonNull(p.getDiscount()))
                 .collect(Collectors.toList());
 
         if (discountedProducts.isEmpty()) {
