@@ -20,7 +20,7 @@ public class BillingServiceImpl implements BillingService {
     private void printBreakdown(Order order) {
         output(String.format("Subtotal: £%.2f", order.getPrice()));
         List<ProductOrder> discountedProducts = order.getOrderItems().stream()
-                .filter(p-> Objects.nonNull(p.getDiscount()))
+                .filter(p-> Objects.nonNull(p.getDiscount()) && p.getDiscount().compareTo(BigDecimal.ZERO) == 1)
                 .collect(Collectors.toList());
 
         if (discountedProducts.isEmpty()) {
