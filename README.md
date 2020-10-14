@@ -10,8 +10,11 @@ The pricebasket is a java application which allows users to add shopping items w
 From the command line:
 
 cd PriceBasket
+
 mvn clean install
+
 cd target
+
 java -jar price-basket-1.0-SNAPSHOT.jar Apple
 
 ## Output
