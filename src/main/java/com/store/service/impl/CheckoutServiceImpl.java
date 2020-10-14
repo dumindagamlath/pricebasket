@@ -1,6 +1,7 @@
 package com.store.service.impl;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-@Data
-@Builder
 @AllArgsConstructor
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
@@ -20,6 +19,7 @@ public class CheckoutServiceImpl implements CheckoutService {
                 .map(x->x.getAmount())
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         order.setDiscount(order.getOrderItems().stream()
+                .filter(x->Objects.nonNull(x.getDiscount()))
                 .map(x->x.getDiscount())
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
     }

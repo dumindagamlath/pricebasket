@@ -10,8 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-@Data
-@Builder
 @AllArgsConstructor
 @Service
 public class DiscountServiceImpl implements DiscountService {

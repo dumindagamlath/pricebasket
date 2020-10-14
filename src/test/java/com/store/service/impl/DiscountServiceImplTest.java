@@ -175,7 +175,7 @@ public class DiscountServiceImplTest {
         List<ProductOrder> orderItems = new ArrayList<>();
         Product apple = Product.builder()
                 .name("Apple")
-                .price(BigDecimal.valueOf(1.22))
+                .price(BigDecimal.valueOf(1.25))
                 .discountPolicy(new PercentageDiscountPolicy(0.50)).build();
         orderItems.add(ProductOrder.builder()
                 .product(apple)
