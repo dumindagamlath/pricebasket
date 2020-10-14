@@ -33,7 +33,18 @@ public class DiscountServiceImplTest {
     }
 
     @Test
-    void applyDiscount_should_return_discount_for_product_with_PercentageDiscountPolicy_with_single_item() {
+    void applyDiscount_should_not_apply_for_product_without_DiscountPolicy() {
+        Order order = getSingleItemOrderWithoutDiscountPolicy();
+
+        discountService.applyDiscount(order);
+
+        assertEquals(1, order.getOrderItems().size());
+        assertEquals(BigDecimal.valueOf(1.20), order.getOrderItems().get(0).getAmount());
+        assertNull(order.getOrderItems().get(0).getDiscount());
+    }
+
+    @Test
+    void applyDiscount_should_apply_discount_for_product_with_PercentageDiscountPolicy_with_single_item() {
         Order order = getSingleItemOrderWithPercentageDiscountPolicy();
 
         discountService.applyDiscount(order);
@@ -44,7 +55,7 @@ public class DiscountServiceImplTest {
     }
 
     @Test
-    void applyDiscount_should_return_discount_for_product_with_PercentageDiscountPolicy_with_multiple_item() {
+    void applyDiscount_should_return_discount_for_product_with_PercentageDiscountPolicy_with_multiple_items() {
         Order order = getMultipleItemOrderWithPercentageDiscountPolicy();
 
         discountService.applyDiscount(order);
@@ -104,7 +115,7 @@ public class DiscountServiceImplTest {
 
     @Test
     void applyDiscount_should_apply_discount_for_product_with_MultiBuyDiscountPolicy_with_single_applicable_product_item() {
-        Order order = getMultipleItemOrderWithMultiBuyDiscountPolicyWithOnlySingleApplicableMultipleReducedItem();
+        Order order = getMultipleItemOrderWithMultiBuyDiscountPolicyWithOnlySingleApplicableReducedItem();
 
         discountService.applyDiscount(order);
 
@@ -117,7 +128,7 @@ public class DiscountServiceImplTest {
 
     @Test
     void applyDiscount_should_apply_discount_for_product_with_MultiBuyDiscountPolicy_with_multiple_applicable_product_quantities() {
-        Order order = getMultipleItemOrderWithMultiBuyDiscountPolicyWithApplicableMultipleReducedItem();
+        Order order = getMultipleItemOrderWithMultiBuyDiscountPolicyWithMultipleApplicableReducedItem();
 
         discountService.applyDiscount(order);
 
@@ -126,6 +137,21 @@ public class DiscountServiceImplTest {
         assertNull(order.getOrderItems().get(0).getDiscount());
         assertEquals(BigDecimal.valueOf(2.40), order.getOrderItems().get(1).getAmount());
         assertEquals(BigDecimal.valueOf(0.48), order.getOrderItems().get(1).getDiscount());
+    }
+
+    private Order getSingleItemOrderWithoutDiscountPolicy() {
+        Order newOrder = new Order();
+        List<ProductOrder> orderItems = new ArrayList<>();
+        Product apple = Product.builder()
+                .name("Apple")
+                .price(BigDecimal.valueOf(1.20)).build();
+        orderItems.add(ProductOrder.builder()
+                .product(apple)
+                .quantity(1)
+                .amount(BigDecimal.valueOf(1.20))
+                .build());
+        newOrder.setOrderItems(orderItems);
+        return newOrder;
     }
 
     private Order getSingleItemOrderWithPercentageDiscountPolicy() {
@@ -246,7 +272,7 @@ public class DiscountServiceImplTest {
         return newOrder;
     }
 
-    private Order getMultipleItemOrderWithMultiBuyDiscountPolicyWithOnlySingleApplicableMultipleReducedItem() {
+    private Order getMultipleItemOrderWithMultiBuyDiscountPolicyWithOnlySingleApplicableReducedItem() {
         Order newOrder = new Order();
         List<ProductOrder> orderItems = new ArrayList<>();
         Product bread = Product.builder()
@@ -270,7 +296,7 @@ public class DiscountServiceImplTest {
         return newOrder;
     }
 
-    private Order getMultipleItemOrderWithMultiBuyDiscountPolicyWithApplicableMultipleReducedItem() {
+    private Order getMultipleItemOrderWithMultiBuyDiscountPolicyWithMultipleApplicableReducedItem() {
         Order newOrder = new Order();
         List<ProductOrder> orderItems = new ArrayList<>();
         Product bread = Product.builder()
