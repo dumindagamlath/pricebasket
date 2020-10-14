@@ -9,13 +9,7 @@ import org.springframework.stereotype.Service;
 import com.store.model.Order;
 import com.store.model.product.ProductOrder;
 import com.store.service.BillingService;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 
-@Data
-@Builder
-@AllArgsConstructor
 @Service
 public class BillingServiceImpl implements BillingService {
     @Override public void printBill(final Order newOrder) {

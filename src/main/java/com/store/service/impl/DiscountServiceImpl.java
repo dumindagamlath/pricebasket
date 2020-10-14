@@ -6,11 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.model.Order;
 import com.store.service.DiscountService;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 
-@AllArgsConstructor
 @Service
 public class DiscountServiceImpl implements DiscountService {
     @Override public void applyDiscount(final Order order) {
