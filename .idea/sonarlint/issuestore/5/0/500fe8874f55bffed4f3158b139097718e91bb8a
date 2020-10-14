@@ -1,0 +1,10 @@
+
+[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Υλ±Δψÿÿÿÿ8¨Έ”Ò.
+rsquid:S00100 "NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ώ²ηθύÿÿÿÿ8ψ©νÒ.
+msquid:S00100("NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(οΊεη8«Λ…Ò.
+―%squid:RedundantThrowsDeclarationCheck("wRemove the declaration of thrown exception 'com.store.exception.ProductNotFoundException' which is a runtime exception.(οΊεη8Υ†Ò.
+squid:UselessImportCheck
+"_Remove this unused import 'org.springframework.boot.autoconfigure.security.SecurityProperties'.(©ΰÿÿÿÿÿ8¨Έ”Ò.
+΄%squid:RedundantThrowsDeclarationCheck "wRemove the declaration of thrown exception 'com.store.exception.ProductNotFoundException' which is a runtime exception.(ώ²ηθύÿÿÿÿ8«ξρÒ.
+\squid:UselessImportCheck"1Remove this unused import 'java.math.BigDecimal'.(κκ8»ύ¤Ò.
+ƒsquid:UselessImportCheck"SRemove this unused import 'com.store.model.discount.impl.PercentageDiscountPolicy'.(³θρωÿÿÿÿ8»ύ¤Ò.

@@ -1,0 +1,6 @@
+
+´%squid:RedundantThrowsDeclarationCheck-"wRemove the declaration of thrown exception 'com.store.exception.ProductNotFoundException' which is a runtime exception.(¸“Ò¨şÿÿÿÿ8†£…ŸÒ.
+rsquid:S00100#"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÓ×Èûÿÿÿÿ8âƒûÒ.
+isquid:S1192."FDefine a constant instead of duplicating this literal "Apple" 4 times.(÷‘¯ãúÿÿÿÿ8†ÆŸÒ.
+´%squid:RedundantThrowsDeclarationCheck#"wRemove the declaration of thrown exception 'com.store.exception.ProductNotFoundException' which is a runtime exception.(ûÓ×Èûÿÿÿÿ8âƒûÒ.
+rsquid:S00100-"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸“Ò¨şÿÿÿÿ8†£…ŸÒ.

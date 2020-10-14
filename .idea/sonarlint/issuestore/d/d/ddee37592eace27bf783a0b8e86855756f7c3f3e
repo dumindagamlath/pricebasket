@@ -1,0 +1,3 @@
+
+Vsquid:S1068"3Remove this unused "checkoutService" private field.(ÅïÈ‰ûÿÿÿÿ8è‰ÔÒ.
+squid:S1450"^Remove the "checkoutService" field and declare it as a local variable in the relevant methods.(ÅïÈ‰ûÿÿÿÿ8¡ÉÔÒ.
